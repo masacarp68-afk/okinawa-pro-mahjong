@@ -3,27 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>協会沖縄プロアマシリーズ</title>
+<title>協会沖縄プロアマシリーズ 成績表</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f4f1ea;
-    --bg-soft: #ebe6d9;
-    --ink: #1a1614;
-    --ink-soft: #4a4039;
-    --ink-mute: #8a7e72;
-    --line: #d4ccbc;
-    --paper: #faf7f0;
-    --accent: #8b1e1e;
-    --accent-deep: #5a1414;
-    --gold: #b8924a;
-    --bamboo: #4a6b3a;
-    --rank-1: #b8924a;
-    --rank-2: #8a8a8a;
-    --rank-3: #a87246;
-    --rank-4: #4a4039;
+    --bg: #fdf8ee;
+    --bg-soft: #f7eed8;
+    --ink: #2b2520;
+    --ink-soft: #5a4a3f;
+    --ink-mute: #9c8b7a;
+    --line: #e8dcc4;
+    --paper: #ffffff;
+    --accent: #e8533e;        /* 朱色をビビッドに */
+    --accent-deep: #c43d28;
+    --accent-soft: #ffd9d0;
+    --gold: #f0b942;
+    --bamboo: #5fa83f;        /* 緑も明るめに */
+    --sky: #5ab4d6;
+    --pink: #f08aa8;
+    --rank-1: #f0b942;
+    --rank-2: #b8b0a3;
+    --rank-3: #d97f4c;
+    --rank-4: #6b5d52;
+    --shadow: 6px 6px 0 rgba(232, 83, 62, 0.15);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body {
@@ -35,8 +39,9 @@
   }
   body {
     background-image:
-      radial-gradient(ellipse at top left, rgba(139, 30, 30, 0.04), transparent 50%),
-      radial-gradient(ellipse at bottom right, rgba(74, 107, 58, 0.04), transparent 50%);
+      radial-gradient(circle at 15% 20%, rgba(240, 185, 66, 0.12), transparent 35%),
+      radial-gradient(circle at 85% 80%, rgba(95, 168, 63, 0.10), transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(232, 83, 62, 0.04), transparent 60%);
     min-height: 100vh;
   }
   .container {
@@ -44,6 +49,7 @@
     margin: 0 auto;
     padding: 48px 32px 80px;
   }
+  a { color: inherit; text-decoration: none; }
 
   /* ==== Header ==== */
   header {
@@ -51,41 +57,63 @@
     grid-template-columns: auto 1fr auto;
     gap: 32px;
     align-items: end;
-    padding-bottom: 32px;
-    margin-bottom: 48px;
-    border-bottom: 1px solid var(--line);
+    padding-bottom: 28px;
+    margin-bottom: 32px;
+    border-bottom: 2px dashed var(--line);
     position: relative;
   }
   header::after {
     content: "";
     position: absolute;
-    bottom: -4px; left: 0;
-    width: 80px; height: 1px;
-    background: var(--accent);
+    bottom: -5px; left: 0;
+    width: 120px; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    border-radius: 2px;
   }
   .logo-mark {
-    width: 72px; height: 72px;
-    border: 2px solid var(--ink);
+    width: 68px; height: 68px;
+    border: 3px solid var(--ink);
+    border-radius: 20px;
     display: grid;
     place-items: center;
     font-family: 'Shippori Mincho', serif;
-    font-size: 38px;
+    font-size: 34px;
     font-weight: 800;
-    background: var(--paper);
-    box-shadow: 4px 4px 0 var(--accent);
+    background: var(--gold);
+    color: var(--ink);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transform: rotate(-3deg);
+    transition: transform 0.15s ease;
   }
+  .logo-mark:hover { transform: rotate(0deg) scale(1.05); }
   .title-block h1 {
     font-family: 'Shippori Mincho', serif;
     font-weight: 800;
-    font-size: 36px;
-    letter-spacing: 0.04em;
-    line-height: 1.1;
+    font-size: 30px;
+    letter-spacing: 0.02em;
+    line-height: 1.15;
     margin-bottom: 6px;
+    cursor: pointer;
   }
-  .title-block h1 .accent { color: var(--accent); }
+  .title-block h1 .accent {
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
+  }
+  .title-block h1 .accent::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 6px;
+    background: var(--gold);
+    opacity: 0.5;
+    z-index: -1;
+    border-radius: 3px;
+  }
   .title-block .subtitle {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.25em;
     color: var(--ink-mute);
     text-transform: uppercase;
@@ -93,143 +121,215 @@
   .meta-block {
     text-align: right;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     color: var(--ink-mute);
     line-height: 1.8;
   }
   .meta-block .label { color: var(--ink-mute); }
   .meta-block .val { color: var(--ink); font-weight: 700; }
 
-  /* ==== Source bar ==== */
+  /* ==== Two-column layout ==== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+  .two-col section { margin-bottom: 0; }
+
+  /* ==== Today's results (side column) ==== */
+  .today-list {
+    background: var(--paper);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .today-item {
+    padding: 14px 16px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .today-item:last-child { border-bottom: none; }
+  .today-item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.1em;
+  }
+  .today-item-num {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .today-mini-list {
+    display: grid;
+    gap: 6px;
+  }
+  .today-mini-row {
+    display: grid;
+    grid-template-columns: 22px 1fr auto auto;
+    gap: 8px;
+    align-items: center;
+    padding: 5px 8px;
+    background: var(--bg-soft);
+    border-radius: 8px;
+    border-left: 3px solid var(--line);
+    font-size: 12px;
+  }
+  .today-mini-row.r1 { border-left-color: var(--gold); background: rgba(240, 185, 66, 0.10); }
+  .today-mini-row.r2 { border-left-color: var(--sky); background: rgba(90, 180, 214, 0.06); }
+  .today-mini-row.r3 { border-left-color: var(--rank-3); background: rgba(217, 127, 76, 0.06); }
+  .today-mini-row.r4 { border-left-color: var(--rank-4); }
+  .today-mini-rank {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    text-align: center;
+    color: var(--ink-soft);
+  }
+  .today-mini-row.r1 .today-mini-rank { color: var(--rank-1); }
+  .today-mini-name {
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .today-mini-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+  }
+  .today-mini-pt {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .today-mini-pt.pos { color: var(--bamboo); }
+  .today-mini-pt.neg { color: var(--accent); }
+
+  @media (max-width: 980px) {
+    .two-col { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .period-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding: 4px;
+  }
+  .period-chip {
+    padding: 10px 18px;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    background: var(--paper);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+  }
+  .period-chip:hover {
+    background: var(--bg-soft);
+    transform: translateY(-2px);
+    border-color: var(--gold);
+  }
+  .period-chip.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    box-shadow: 0 3px 0 var(--accent-deep);
+  }
+  .period-chip .en {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    margin-bottom: 2px;
+  }
+  .period-chip.active .en { color: rgba(255, 255, 255, 0.7); }
+
+  /* ==== Status / source bar ==== */
   .source-bar {
     background: var(--paper);
-    border: 1px solid var(--line);
-    padding: 18px 24px;
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 12px 20px;
     margin-bottom: 24px;
     display: flex;
     align-items: center;
     gap: 16px;
     flex-wrap: wrap;
-  }
-  .source-bar .src-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.15em;
+  }
+  .source-bar .src-label {
     color: var(--ink-mute);
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    border-right: 1px solid var(--line);
-    padding-right: 16px;
+    border-right: 2px dashed var(--line);
+    padding-right: 12px;
   }
   .source-bar input {
     flex: 1;
-    min-width: 280px;
+    min-width: 200px;
     border: none;
     background: transparent;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
+    font-size: 11px;
     color: var(--ink);
-    padding: 6px 0;
     outline: none;
   }
-  .source-bar input::placeholder { color: var(--ink-mute); }
   .source-bar button {
-    background: var(--ink);
-    color: var(--bg);
+    background: var(--accent);
+    color: white;
     border: none;
-    padding: 10px 22px;
+    padding: 8px 18px;
     font-family: 'Zen Kaku Gothic New', sans-serif;
     font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .source-bar button:hover { background: var(--accent); }
-  .source-bar .status {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--bamboo);
-  }
-  .dedup-info {
-    background: var(--bg-soft);
-    border: 1px solid var(--line);
-    padding: 12px 24px;
-    margin-bottom: 40px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--ink-mute);
+    font-size: 12px;
     letter-spacing: 0.05em;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 2px 0 var(--accent-deep);
+    transition: transform 0.1s;
   }
-  .dedup-info .badge {
-    background: var(--bamboo);
-    color: var(--paper);
-    padding: 2px 8px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    font-size: 10px;
+  .source-bar button:hover { transform: translateY(-1px); }
+  .source-bar button:active { transform: translateY(1px); box-shadow: none; }
+  .source-bar .status { color: var(--bamboo); font-weight: 700; }
+  .source-bar .toggle-src {
+    color: var(--ink-mute);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    margin-left: auto;
   }
-  .dedup-info .count { color: var(--accent); font-weight: 700; }
-
-  /* ==== Progress bar ==== */
-  .progress-bar {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 40px;
-  }
-  .progress-step {
-    flex: 1;
-    padding: 14px 16px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    text-align: center;
-  }
-  .progress-step.done {
-    background: var(--ink);
-    color: var(--bg);
-    border-color: var(--ink);
-  }
-  .progress-step.current {
-    background: var(--paper);
-    border-color: var(--accent);
-    border-width: 2px;
-  }
-  .progress-step .step-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    opacity: 0.7;
-  }
-  .progress-step .step-label {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 15px;
-    font-weight: 700;
-    margin-top: 4px;
-  }
-  .progress-step.done .step-label::before {
-    content: "✓ ";
-    color: var(--gold);
-  }
+  .source-detail { display: none; }
+  .source-detail.visible { display: flex; }
 
   /* ==== Section ==== */
-  section { margin-bottom: 64px; }
+  section { margin-bottom: 56px; }
   .section-head {
     display: flex;
     align-items: baseline;
     gap: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
   .section-head h2 {
     font-family: 'Shippori Mincho', serif;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
     letter-spacing: 0.08em;
   }
   .section-head .en {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.3em;
     color: var(--ink-mute);
     text-transform: uppercase;
@@ -244,30 +344,40 @@
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 48px;
+    gap: 14px;
+    margin-bottom: 40px;
   }
   .stat-card {
     background: var(--paper);
-    border: 1px solid var(--line);
-    padding: 24px;
+    border: 2px solid var(--line);
+    border-radius: 18px;
+    padding: 20px;
+    position: relative;
+    transition: transform 0.15s;
   }
+  .stat-card:hover {
+    transform: translateY(-3px);
+  }
+  .stat-card:nth-child(1) { border-top: 5px solid var(--gold); }
+  .stat-card:nth-child(2) { border-top: 5px solid var(--sky); }
+  .stat-card:nth-child(3) { border-top: 5px solid var(--bamboo); }
+  .stat-card:nth-child(4) { border-top: 5px solid var(--accent); }
   .stat-card .stat-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
     color: var(--ink-mute);
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .stat-card .stat-value {
     font-family: 'Shippori Mincho', serif;
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 700;
     line-height: 1;
   }
   .stat-card .stat-sub {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--ink-mute);
     margin-top: 6px;
   }
@@ -275,7 +385,8 @@
   /* ==== Ranking table ==== */
   .ranking {
     background: var(--paper);
-    border: 1px solid var(--line);
+    border: 2px solid var(--line);
+    border-radius: 18px;
     overflow: hidden;
   }
   .ranking table {
@@ -284,9 +395,9 @@
   }
   .ranking th {
     text-align: left;
-    padding: 16px 24px;
+    padding: 14px 20px;
     background: var(--bg-soft);
-    border-bottom: 2px solid var(--ink);
+    border-bottom: 3px solid var(--gold);
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
@@ -297,17 +408,19 @@
   .ranking th.num, .ranking td.num { text-align: right; font-variant-numeric: tabular-nums; }
   .ranking th.center, .ranking td.center { text-align: center; }
   .ranking td {
-    padding: 18px 24px;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--line);
-    font-size: 14px;
+    font-size: 13px;
   }
   .ranking tr:last-child td { border-bottom: none; }
+  .ranking tr.row { cursor: pointer; transition: background 0.1s; }
   .ranking tr.row:hover { background: var(--bg-soft); }
+  .ranking tr.row:hover .player-name { color: var(--accent); }
   .ranking .rank-cell {
     font-family: 'Shippori Mincho', serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
-    width: 80px;
+    width: 70px;
     text-align: center;
   }
   .ranking .rank-1 { color: var(--rank-1); }
@@ -315,8 +428,9 @@
   .ranking .rank-3 { color: var(--rank-3); }
   .ranking .player-name {
     font-family: 'Shippori Mincho', serif;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
+    transition: color 0.15s;
   }
   .ranking .player-num {
     font-family: 'JetBrains Mono', monospace;
@@ -326,7 +440,7 @@
   }
   .ranking .points {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
   }
   .ranking .points.pos { color: var(--bamboo); }
@@ -335,81 +449,73 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--ink-mute);
-    margin-left: 12px;
+    margin-left: 10px;
+  }
+  .ranking .rank-dist {
+    display: inline-flex;
+    gap: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+  .ranking .rank-dist span {
+    background: var(--bg-soft);
+    padding: 3px 9px;
+    color: var(--ink-soft);
+    border-radius: 10px;
+    font-weight: 700;
+  }
+  .ranking .arrow-link {
+    color: var(--ink-mute);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
   }
 
-  /* ==== Records list ==== */
-  .round-group {
-    border-bottom: 2px solid var(--ink);
+  /* ==== Recent results ==== */
+  .records {
     background: var(--paper);
-  }
-  .round-group:last-child { border-bottom: none; }
-  .round-header {
-    background: var(--ink);
-    color: var(--bg);
-    padding: 12px 24px;
-    font-family: 'Shippori Mincho', serif;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .round-header .en {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    text-transform: uppercase;
+    border: 2px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
   }
   .record-row {
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 110px 1fr;
     gap: 24px;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--line);
+    padding: 18px 20px;
+    border-bottom: 1px dashed var(--line);
     align-items: center;
   }
   .record-row:last-child { border-bottom: none; }
   .record-row:hover { background: var(--bg-soft); }
-  .record-table {
-    font-family: 'Shippori Mincho', serif;
-    border-right: 1px solid var(--line);
-    padding-right: 16px;
-  }
-  .record-table .num {
-    display: block;
-    font-size: 28px;
-    font-weight: 800;
-    line-height: 1;
-    color: var(--accent);
-  }
-  .record-table .label {
-    display: block;
+  .record-time {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
+    font-size: 11px;
     color: var(--ink-mute);
-    margin-top: 4px;
-    text-transform: uppercase;
+    line-height: 1.6;
+    border-right: 2px dashed var(--line);
+    padding-right: 14px;
   }
+  .record-time .date { display: block; font-size: 14px; color: var(--ink); font-weight: 700; }
   .record-results {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
   .result-slot {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 10px;
+    padding: 8px 12px;
     background: var(--bg-soft);
-    border-left: 3px solid var(--line);
+    border-left: 4px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
   }
-  .result-slot.r1 { border-left-color: var(--rank-1); background: rgba(184, 146, 74, 0.08); }
-  .result-slot.r2 { border-left-color: var(--rank-2); }
-  .result-slot.r3 { border-left-color: var(--rank-3); }
+  .result-slot:hover { transform: translateY(-2px); }
+  .result-slot.r1 { border-left-color: var(--gold); background: rgba(240, 185, 66, 0.12); }
+  .result-slot.r2 { border-left-color: var(--sky); background: rgba(90, 180, 214, 0.08); }
+  .result-slot.r3 { border-left-color: var(--rank-3); background: rgba(217, 127, 76, 0.08); }
   .result-slot.r4 { border-left-color: var(--rank-4); }
   .result-rank {
     font-family: 'Shippori Mincho', serif;
@@ -435,6 +541,18 @@
     margin-right: 4px;
     font-weight: 400;
   }
+  .result-name .seat-tag {
+    display: inline-block;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 10px;
+    background: var(--ink);
+    color: var(--gold);
+    padding: 1px 5px;
+    border-radius: 4px;
+    margin-right: 4px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
   .result-score {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
@@ -442,16 +560,139 @@
   }
   .result-pt {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
   }
   .result-pt.pos { color: var(--bamboo); }
   .result-pt.neg { color: var(--accent); }
 
+  /* ==== Player page ==== */
+  .player-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: center;
+    background: var(--paper);
+    border: 2px solid var(--line);
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .player-header::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .player-header > * { position: relative; z-index: 1; }
+  .player-avatar {
+    width: 96px; height: 96px;
+    border: 3px solid var(--ink);
+    background: var(--gold);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 44px;
+    font-weight: 800;
+    box-shadow: var(--shadow);
+    color: var(--ink);
+  }
+  .player-headline h2 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .player-headline .pn-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+  .player-headline .pt-summary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 12px;
+  }
+  .player-headline .pt-summary.pos { color: var(--bamboo); }
+  .player-headline .pt-summary.neg { color: var(--accent); }
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    cursor: pointer;
+    align-self: start;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  /* ==== Player stats grid ==== */
+  .player-stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .player-stat {
+    background: var(--paper);
+    border: 2px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.15s;
+  }
+  .player-stat:hover { transform: translateY(-3px); }
+  .player-stat .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .player-stat .value {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .player-stat .sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    margin-top: 4px;
+  }
+  .player-stat.r1 .value { color: var(--rank-1); }
+  .player-stat.r2 .value { color: var(--rank-2); }
+  .player-stat.r3 .value { color: var(--rank-3); }
+  .player-stat.r4 .value { color: var(--rank-4); }
+  .player-stat.best .value { color: var(--bamboo); }
+  .player-stat.worst .value { color: var(--accent); }
+
+  /* ==== Chart ==== */
+  .chart-wrap {
+    background: var(--paper);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 40px;
+  }
+  .chart-wrap svg { width: 100%; height: auto; display: block; }
+
   /* ==== Footer ==== */
   footer {
-    margin-top: 80px;
-    padding-top: 32px;
+    margin-top: 64px;
+    padding-top: 24px;
     border-top: 1px solid var(--line);
     display: flex;
     justify-content: space-between;
@@ -461,19 +702,34 @@
     letter-spacing: 0.15em;
   }
 
+  /* ==== Empty state ==== */
+  .empty-state {
+    text-align: center;
+    padding: 60px 24px;
+    font-family: 'Shippori Mincho', serif;
+    color: var(--ink-mute);
+    background: var(--paper);
+    border: 2px dashed var(--line);
+    border-radius: 18px;
+  }
+  .empty-state .emoji { font-size: 36px; margin-bottom: 12px; opacity: 0.6; }
+
   /* ==== Responsive ==== */
   @media (max-width: 880px) {
-    .container { padding: 32px 20px 60px; }
-    header { grid-template-columns: auto 1fr; }
+    .container { padding: 28px 16px 56px; }
+    header { grid-template-columns: auto 1fr; gap: 16px; }
     .meta-block { display: none; }
-    .title-block h1 { font-size: 24px; }
+    .title-block h1 { font-size: 22px; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .ranking { overflow-x: auto; }
-    .ranking table { min-width: 420px; }
+    .ranking table { min-width: 600px; }
     .record-results { grid-template-columns: repeat(2, 1fr); }
-    .progress-bar { gap: 4px; }
-    .progress-step { padding: 10px 6px; }
-    .progress-step .step-label { font-size: 12px; }
+    .player-header { grid-template-columns: auto 1fr; padding: 20px; gap: 16px; }
+    .player-avatar { width: 64px; height: 64px; font-size: 28px; }
+    .player-headline h2 { font-size: 24px; }
+    .player-headline .pt-summary { font-size: 18px; }
+    .back-link { grid-column: 1 / -1; }
+    .player-stats { grid-template-columns: repeat(3, 1fr); }
   }
 </style>
 </head>
@@ -481,72 +737,71 @@
 <div class="container">
 
   <header>
-    <div class="logo-mark">雀</div>
+    <div class="logo-mark" onclick="location.reload()">雀</div>
     <div class="title-block">
-      <h1>協会沖縄<span class="accent">プロアマ</span>シリーズ</h1>
+      <h1 onclick="location.reload()">協会沖縄<span class="accent">プロアマ</span>シリーズ</h1>
       <div class="subtitle">OKINAWA · PRO-AM · ONE-DAY TOURNAMENT</div>
     </div>
     <div class="meta-block">
-      <div><span class="label">FORMAT</span> &nbsp; <span class="val">1day / 5半荘</span></div>
+      <div><span class="label">RULE</span> &nbsp; <span class="val">4人打ち / 半荘 / 5回戦</span></div>
       <div><span class="label">UPD</span> &nbsp; <span class="val" id="lastUpdate">—</span></div>
     </div>
   </header>
 
   <div class="source-bar">
+    <span class="status" id="status">● サンプルデータ表示中</span>
+    <span class="toggle-src" onclick="toggleSource()">[ データソース ]</span>
+  </div>
+  <div class="source-bar source-detail" id="sourceDetail">
     <div class="src-label">RESULTS</div>
-    <input type="text" id="sheetUrl" placeholder="「結果」シートのURL（空欄ならサンプルデータを表示）">
+    <input type="text" id="sheetUrl" placeholder="「結果」シートのURL">
     <button onclick="loadData()">読込</button>
   </div>
-  <div class="source-bar">
+  <div class="source-bar source-detail" id="sourceDetail2">
     <div class="src-label">PLAYERS</div>
-    <input type="text" id="masterUrl" placeholder="「選手マスタ」シートのURL（任意・選手番号→名前の変換に使用）">
-    <span class="status" id="status">● サンプルデータ表示中</span>
+    <input type="text" id="masterUrl" placeholder="「選手マスタ」シートのURL">
   </div>
 
-  <div class="dedup-info">
-    <span class="badge">AUTO DEDUP</span>
-    <span>同一ラウンド×卓番号は最新のタイムスタンプを採用 ／ <span class="count" id="dedupCount">0</span> 件の重複行をフィルタしました</span>
+  <!-- ==== ホーム画面 ==== -->
+  <div id="homeView">
+    <section>
+      <div class="section-head">
+        <h2>概況</h2>
+        <span class="en">OVERVIEW</span>
+        <div class="rule"></div>
+      </div>
+      <div class="stats-grid" id="statsGrid"></div>
+    </section>
+
+    <div class="two-col">
+      <section class="col-main">
+        <div class="section-head">
+          <h2>順位表</h2>
+          <span class="en">RANKING</span>
+          <div class="rule"></div>
+        </div>
+        <div id="rankingWrap"></div>
+      </section>
+
+      <section class="col-side">
+        <div class="section-head">
+          <h2>今日の成績</h2>
+          <span class="en">TODAY</span>
+          <div class="rule"></div>
+        </div>
+        <div id="todayList"></div>
+      </section>
+    </div>
+
+    <section>
+      <div class="section-head">
+        <h2>対局履歴</h2>
+        <span class="en">ALL GAMES</span>
+        <div class="rule"></div>
+      </div>
+      <div id="recordsList"></div>
+    </section>
   </div>
-
-  <div class="progress-bar" id="progressBar"></div>
-
-  <section>
-    <div class="section-head">
-      <h2>概況</h2>
-      <span class="en">OVERVIEW</span>
-      <div class="rule"></div>
-    </div>
-    <div class="stats-grid" id="statsGrid"></div>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <h2>順位表</h2>
-      <span class="en">RANKING</span>
-      <div class="rule"></div>
-    </div>
-    <div class="ranking">
-      <table>
-        <thead>
-          <tr>
-            <th class="center">順位</th>
-            <th>プレイヤー</th>
-            <th class="num">累計pt</th>
-          </tr>
-        </thead>
-        <tbody id="rankingBody"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head">
-      <h2>対局結果</h2>
-      <span class="en">RESULTS</span>
-      <div class="rule"></div>
-    </div>
-    <div id="recordsList"></div>
-  </section>
 
   <footer>
     <div>© 協会沖縄プロアマシリーズ</div>
@@ -555,483 +810,497 @@
 </div>
 
 <script>
-  // ============================================================
-  // 1day大会 / 5半荘 / Googleフォーム入力対応版
-  //
-  // 【スプレッドシート構成】
-  //  シート1「結果」: フォーム送信の生データ + VLOOKUPで選手名を解決
-  //   timestamp, round, table, p1_num, p1_name, p1_score,
-  //                            p2_num, p2_name, p2_score,
-  //                            p3_num, p3_name, p3_score,
-  //                            p4_num, p4_name, p4_score
-  //   (p*_name 列は =VLOOKUP(p*_num, 選手マスタ!A:B, 2, FALSE) を入れる)
-  //
-  //  シート2「選手マスタ」: A列=選手番号, B列=選手名
-  //
-  // 【再送信処理】
-  //  (round, table)が同じ行が複数ある場合、timestamp が最新の行だけを採用。
-  // ============================================================
-  const TOTAL_ROUNDS = 5;
+'use strict';
 
-  // サンプルデータ生成 (40人/10卓×5半荘, 選手番号付き, 一部に重複再送信を仕込む)
-  const POOL = [
-    '比嘉','金城','大城','宮城','上原','新垣','玉城','島袋',
-    '仲宗根','山田','照屋','當間','与那覇','安里','謝花','宮里',
-    '長嶺','仲井真','屋良','石川','糸数','古堅','名嘉','喜納',
-    '渡嘉敷','瑞慶覧','東江','内間','瀬底','平良','友寄','古謝',
-    '神谷','宜野座','親泊','嘉手納','久高','津堅','伊是名','粟国'
-  ];
-  const PLAYER_MASTER = POOL.map((name, i) => ({ num: 101 + i, name }));
+// ============================================================
+// 設定
+// ============================================================
+const DEFAULT_RESULTS_URL = "https://docs.google.com/spreadsheets/d/10JW_DidDrRXC1yQ8EtlskpbKXS1kpQpKakCDAOq7gaw/edit?gid=875240299#gid=875240299";
+const DEFAULT_MASTER_URL  = "https://docs.google.com/spreadsheets/d/1MYCVja3lWJYn02GuBE8pUtY48QL3Nkak-0DZtPx5CMQ/edit?gid=0#gid=0";
+const AUTO_REFRESH_MS = 300000;   // 5分ごとに自動更新(0で無効)
 
-  function generateSampleRows() {
-    const rows = [];
-    let seed = 42;
-    const rand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
-    let timestamp = new Date('2025-05-24T10:00:00').getTime();
+// ウマ・オカ
+const UMA = [30, 10, -10, -30];
+const RETURN_PT = 30000;
+const ORIGIN_PT = 25000;
 
-    const completedRounds = 4;
-    for (let r = 1; r <= completedRounds; r++) {
-      const shuffled = [...PLAYER_MASTER].sort(() => rand() - 0.5);
-      for (let t = 1; t <= 10; t++) {
-        const picked = shuffled.slice((t-1) * 4, t * 4);
-        let scores = [
-          25000 + Math.floor(rand() * 25000),
-          25000 + Math.floor(rand() * 10000) - 5000,
-          25000 - Math.floor(rand() * 10000),
-          25000 - Math.floor(rand() * 20000),
-        ];
-        const sum = scores.reduce((s, v) => s + v, 0);
-        scores[0] += (100000 - sum);
-        scores = scores.map(s => Math.round(s / 100) * 100);
-        const diff = 100000 - scores.reduce((s, v) => s + v, 0);
-        scores[0] += diff;
+// ============================================================
+// サンプルデータ生成
+// ============================================================
+const POOL = [
+  '比嘉','金城','大城','宮城','上原','新垣','玉城','島袋',
+  '仲宗根','山田','照屋','當間','与那覇','安里','謝花','宮里',
+  '長嶺','仲井真','屋良','石川'
+];
+const PLAYER_MASTER_SAMPLE = POOL.map((name, i) => ({ num: 101 + i, name }));
 
-        timestamp += 60000 + Math.floor(rand() * 120000);
-        rows.push({
-          timestamp,
-          round: r,
-          table: t,
-          players: picked.map((p, i) => ({ num: p.num, name: p.name, score: scores[i] }))
-        });
-      }
-    }
-    // 入力ミス再送信のシミュレーション:
-    // round=2/table=3 と round=3/table=7 を別の(訂正)送信で上書き
-    const fixTargets = [{ r: 2, t: 3 }, { r: 3, t: 7 }];
-    fixTargets.forEach(({ r, t }) => {
-      const orig = rows.find(x => x.round === r && x.table === t);
-      if (!orig) return;
-      timestamp += 30000;
-      const corrected = {
-        timestamp,
-        round: r,
-        table: t,
-        players: orig.players.map((p, i) => ({
-          ...p,
-          // 正しい点数 (小さな修正としてバラつかせる)
-          score: p.score + (i === 0 ? 1000 : i === 3 ? -1000 : 0)
+function generateSampleRows() {
+  const rows = [];
+  let seed = 42;
+  const rand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+  const seatNames = ['東', '南', '西', '北'];
+
+  // 1day大会: 今日、5半荘 × 4卓 = 20対局
+  const today = new Date();
+  today.setHours(10, 0, 0, 0); // 10時スタート
+
+  const tables = 4;
+  const hanchanCount = 5;
+
+  for (let h = 0; h < hanchanCount; h++) {
+    for (let t = 0; t < tables; t++) {
+      const ts = new Date(today);
+      ts.setHours(10 + h * 2, t * 15 + Math.floor(rand() * 10));
+
+      const shuffled = [...PLAYER_MASTER_SAMPLE].sort(() => rand() - 0.5);
+      const picked = shuffled.slice(t * 4, t * 4 + 4);
+      if (picked.length < 4) continue; // プレイヤー数が足りなければスキップ
+
+      let scores = [
+        25000 + Math.floor(rand() * 25000),
+        25000 + Math.floor(rand() * 10000) - 5000,
+        25000 - Math.floor(rand() * 10000),
+        25000 - Math.floor(rand() * 20000),
+      ];
+      const sum = scores.reduce((s, v) => s + v, 0);
+      scores[0] += (100000 - sum);
+      scores = scores.map(s => Math.round(s / 100) * 100);
+      const diff = 100000 - scores.reduce((s, v) => s + v, 0);
+      scores[0] += diff;
+
+      const playerScorePairs = picked.map((p, i) => ({ player: p, score: scores[i] }));
+      playerScorePairs.sort(() => rand() - 0.5);
+      rows.push({
+        timestamp: ts.getTime(),
+        gameDate: ts.getTime(),
+        players: playerScorePairs.map((pair, i) => ({
+          num: pair.player.num,
+          name: pair.player.name,
+          score: pair.score,
+          seat: seatNames[i]
         }))
-      };
-      rows.push(corrected);
-    });
-    return rows;
-  }
-  const SAMPLE_ROWS = generateSampleRows();
-
-  // ウマ・オカ
-  const UMA = [30, 10, -10, -30];
-  const RETURN_PT = 30000;
-  const ORIGIN_PT = 25000;
-
-  function calcPoints(playersSortedByScoreDesc) {
-    // 同点グループを検出し、ウマ・オカを山分けする
-    // 例: A=30000, B=30000, C=25000, D=15000 → A,Bは1-2位を山分け
-    //      ウマ:(30+10)/2 = +20pt ずつ
-    //      オカ:1位分の+20ptを2人で山分け → +10pt ずつ
-    //
-    // 素点ptは各自の持ち点から計算(同点なら結果同じ)
-    // 順位は同点者には同じ順位を割り当てる(例: 1,1,3,4)
-
-    const n = playersSortedByScoreDesc.length;
-
-    // 同点グループ分け: 同じscoreが連続する範囲をまとめる
-    // 各プレイヤーに「順位の範囲(start, end)」を割り当てる
-    const groups = []; // [{indices: [0,1], startRank: 1, endRank: 2}, ...]
-    let i = 0;
-    while (i < n) {
-      let j = i;
-      while (j + 1 < n && playersSortedByScoreDesc[j + 1].score === playersSortedByScoreDesc[i].score) {
-        j++;
-      }
-      groups.push({
-        indices: Array.from({length: j - i + 1}, (_, k) => i + k),
-        startRank: i + 1,
-        endRank: j + 1
       });
-      i = j + 1;
     }
+  }
+  return rows;
+}
+const SAMPLE_ROWS = generateSampleRows();
 
-    // 1位総取りオカ: (返し点 - 原点) × 4 / 1000
-    const okaTotal = (RETURN_PT - ORIGIN_PT) * 4 / 1000;
-
-    return playersSortedByScoreDesc.map((p, idx) => {
-      // この人が属するグループを探す
-      const group = groups.find(g => g.indices.includes(idx));
-      const groupSize = group.indices.length;
-
-      // ウマの山分け: group内の順位点を合算して平均
-      let umaSum = 0;
-      for (let r = group.startRank; r <= group.endRank; r++) {
-        umaSum += UMA[r - 1];
-      }
-      const umaAvg = umaSum / groupSize;
-
-      // オカの山分け: 1位がグループに含まれていれば、グループ人数で割る
-      let okaShare = 0;
-      if (group.startRank === 1) {
-        okaShare = okaTotal / groupSize;
-      }
-
-      const pt = (p.score - RETURN_PT) / 1000 + umaAvg + okaShare;
-
-      return {
-        ...p,
-        rank: group.startRank, // 同点グループは全員同じ順位(タイ)
-        pt: Math.round(pt * 10) / 10
-      };
+// ============================================================
+// ポイント計算(同点ウマオカ山分け対応)
+// ============================================================
+function calcPoints(playersSortedByScoreDesc) {
+  const n = playersSortedByScoreDesc.length;
+  const groups = [];
+  let i = 0;
+  while (i < n) {
+    let j = i;
+    while (j + 1 < n && playersSortedByScoreDesc[j + 1].score === playersSortedByScoreDesc[i].score) j++;
+    groups.push({
+      indices: Array.from({length: j - i + 1}, (_, k) => i + k),
+      startRank: i + 1,
+      endRank: j + 1
     });
+    i = j + 1;
   }
+  const okaTotal = (RETURN_PT - ORIGIN_PT) * 4 / 1000;
+  return playersSortedByScoreDesc.map((p, idx) => {
+    const group = groups.find(g => g.indices.includes(idx));
+    const groupSize = group.indices.length;
+    let umaSum = 0;
+    for (let r = group.startRank; r <= group.endRank; r++) umaSum += UMA[r - 1];
+    const umaAvg = umaSum / groupSize;
+    let okaShare = 0;
+    if (group.startRank === 1) okaShare = okaTotal / groupSize;
+    const pt = (p.score - RETURN_PT) / 1000 + umaAvg + okaShare;
+    return { ...p, rank: group.startRank, pt: Math.round(pt * 10) / 10 };
+  });
+}
 
-  // 重複行を除外: (round, table) ごとに最新タイムスタンプの1行のみ採用
-  function dedupRows(rows) {
-    const map = new Map();
-    let dropped = 0;
-    rows.forEach(row => {
-      const key = `${row.round}-${row.table}`;
-      const existing = map.get(key);
-      if (!existing) {
-        map.set(key, row);
-      } else if (row.timestamp > existing.timestamp) {
-        map.set(key, row);
-        dropped += 1;
-      } else {
-        dropped += 1;
-      }
-    });
-    return { rows: Array.from(map.values()), dropped };
+// ============================================================
+// 状態
+// ============================================================
+let playerMaster = {};
+let allRows = [];
+let allGames = []; // 計算済みの全対局
+let autoRefreshTimer = null;
+
+// 初期マスタ(サンプル用)
+PLAYER_MASTER_SAMPLE.forEach(p => { playerMaster[p.num] = p.name; });
+
+// ============================================================
+// データ処理
+// ============================================================
+function processRows(rows) {
+  return rows.map(row => ({
+    timestamp: row.timestamp,
+    gameDate: row.gameDate || row.timestamp,
+    results: calcPoints([...row.players].sort((a, b) => b.score - a.score))
+  })).sort((a, b) => b.timestamp - a.timestamp);
+}
+
+function aggregatePlayers(games) {
+  const map = {};
+  games.forEach(g => g.results.forEach(r => {
+    const key = r.num;
+    if (!map[key]) map[key] = { num: r.num, name: r.name, totalPt: 0, games: 0, ranks: [0,0,0,0] };
+    map[key].totalPt += r.pt;
+    map[key].games += 1;
+    map[key].ranks[r.rank - 1] += 1;
+    map[key].name = r.name; // 最新のマスタ名を反映
+  }));
+  return Object.values(map).map(p => ({
+    ...p,
+    totalPt: Math.round(p.totalPt * 10) / 10,
+    avgRank: p.games > 0 ? Math.round((p.ranks.reduce((s, c, i) => s + c * (i+1), 0) / p.games) * 100) / 100 : 0,
+    rates: p.ranks.map(c => p.games > 0 ? Math.round((c / p.games) * 1000) / 10 : 0)
+  })).sort((a, b) => b.totalPt - a.totalPt);
+}
+
+// 今日の対局のみ抽出
+function getTodayGames(games) {
+  const today = new Date();
+  const y = today.getFullYear();
+  const m = today.getMonth();
+  const d = today.getDate();
+  return games.filter(g => {
+    const gd = new Date(g.gameDate || g.timestamp);
+    return gd.getFullYear() === y && gd.getMonth() === m && gd.getDate() === d;
+  });
+}
+
+// ============================================================
+// ホーム画面の描画
+// ============================================================
+function renderHome() {
+  const players = aggregatePlayers(allGames);
+  const todayGames = getTodayGames(allGames);
+  renderHomeStats(allGames, players, todayGames);
+  renderHomeRanking(players);
+  renderTodayList(todayGames);
+  renderHomeRecords(allGames);
+}
+
+function renderHomeStats(games, players, todayGames) {
+  const totalGames = games.length;
+  const totalPlayers = players.length;
+  const top = players[0];
+  const todayCount = todayGames ? todayGames.length : 0;
+
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">TODAY</div>
+      <div class="stat-value">${todayCount}</div>
+      <div class="stat-sub">今日の対局数</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">TOTAL GAMES</div>
+      <div class="stat-value">${totalGames}</div>
+      <div class="stat-sub">通算対局数</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">PLAYERS</div>
+      <div class="stat-value">${totalPlayers}</div>
+      <div class="stat-sub">参加人数</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">LEADER</div>
+      <div class="stat-value" style="font-size:22px;">${top ? top.name : '—'}</div>
+      <div class="stat-sub">${top ? ((top.totalPt > 0 ? '+' : '') + top.totalPt + ' pt') : '—'}</div>
+    </div>
+  `;
+}
+
+function renderHomeRanking(players) {
+  if (players.length === 0) {
+    document.getElementById('rankingWrap').innerHTML = `<div class="empty-state"><div class="emoji">🀄</div>まだ記録がありません</div>`;
+    return;
   }
+  const rows = players.map((p, i) => {
+    const rank = i + 1;
+    const rankClass = rank <= 3 ? `rank-${rank}` : '';
+    const ptClass = p.totalPt >= 0 ? 'pos' : 'neg';
+    const ptStr = (p.totalPt > 0 ? '+' : '') + p.totalPt.toFixed(1);
+    return `
+      <tr class="row">
+        <td class="rank-cell ${rankClass}">${rank}</td>
+        <td>
+          <span class="player-num">#${p.num}</span><span class="player-name">${p.name}</span>
+          <span class="games-mini">${p.games}半荘</span>
+        </td>
+        <td class="num"><span class="points ${ptClass}">${ptStr}</span></td>
+        <td class="num">${p.avgRank.toFixed(2)}</td>
+        <td class="center">
+          <span class="rank-dist">
+            <span>${p.ranks[0]}</span>
+            <span>${p.ranks[1]}</span>
+            <span>${p.ranks[2]}</span>
+            <span>${p.ranks[3]}</span>
+          </span>
+        </td>
+      </tr>
+    `;
+  }).join('');
+  document.getElementById('rankingWrap').innerHTML = `
+    <div class="ranking">
+      <table>
+        <thead>
+          <tr>
+            <th class="center">順位</th>
+            <th>プレイヤー</th>
+            <th class="num">累計pt</th>
+            <th class="num">平均順位</th>
+            <th class="center">着順分布</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  `;
+}
 
-  let allRows = [];
-  let dropCount = 0;
-
-  function processData(rows) {
-    return rows.map(row => ({
-      round: row.round,
-      table: row.table,
-      timestamp: row.timestamp,
-      results: calcPoints([...row.players].sort((a, b) => b.score - a.score))
-    })).sort((a, b) => a.round - b.round || a.table - b.table);
+// 今日の対局を時系列順(古い→新しい)で表示
+function renderTodayList(todayGames) {
+  if (!todayGames || todayGames.length === 0) {
+    document.getElementById('todayList').innerHTML = `<div class="empty-state" style="padding: 40px 16px;"><div class="emoji">📭</div>今日の対局はまだありません</div>`;
+    return;
   }
-
-  function aggregatePlayers(games) {
-    const map = {};
-    games.forEach(g => g.results.forEach(r => {
-      const key = r.num || r.name;
-      if (!map[key]) map[key] = { num: r.num, name: r.name, totalPt: 0, games: 0 };
-      map[key].totalPt += r.pt;
-      map[key].games += 1;
-    }));
-    return Object.values(map).map(p => ({
-      ...p,
-      totalPt: Math.round(p.totalPt * 10) / 10
-    })).sort((a, b) => b.totalPt - a.totalPt);
-  }
-
-  function renderProgress(games) {
-    const playedRounds = new Set(games.map(g => g.round));
-    const maxPlayed = playedRounds.size > 0 ? Math.max(...playedRounds) : 0;
-    document.getElementById('progressBar').innerHTML =
-      Array.from({length: TOTAL_ROUNDS}, (_, i) => {
-        const r = i + 1;
-        const done = playedRounds.has(r);
-        const current = r === maxPlayed + 1;
-        const cls = done ? 'done' : (current ? 'current' : '');
-        return `
-          <div class="progress-step ${cls}">
-            <div class="step-num">ROUND ${r}</div>
-            <div class="step-label">${r}半荘目</div>
-          </div>
-        `;
-      }).join('');
-  }
-
-  function renderStats(games, players) {
-    const playedRounds = new Set(games.map(g => g.round)).size;
-    const totalPlayers = players.length;
-    const topPlayer = players[0];
-    const totalTables = games.length;
-
-    document.getElementById('statsGrid').innerHTML = `
-      <div class="stat-card">
-        <div class="stat-label">PROGRESS</div>
-        <div class="stat-value">${playedRounds}<span style="font-size:18px;color:var(--ink-mute);"> / ${TOTAL_ROUNDS}</span></div>
-        <div class="stat-sub">半荘完了</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">PLAYERS</div>
-        <div class="stat-value">${totalPlayers}</div>
-        <div class="stat-sub">参加人数</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">TABLES</div>
-        <div class="stat-value">${totalTables}</div>
-        <div class="stat-sub">総卓数</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">LEADER</div>
-        <div class="stat-value" style="font-size:26px;">${topPlayer ? topPlayer.name : '—'}</div>
-        <div class="stat-sub">${topPlayer ? ((topPlayer.totalPt > 0 ? '+' : '') + topPlayer.totalPt + ' pt') : '—'}</div>
+  // 古い順に並べて「1半荘目, 2半荘目...」と表示
+  const sorted = [...todayGames].sort((a, b) => a.timestamp - b.timestamp);
+  const items = sorted.map((g, idx) => {
+    const time = new Date(g.timestamp).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+    return `
+      <div class="today-item">
+        <div class="today-item-head">
+          <span class="today-item-num">${idx + 1}半荘目</span>
+          <span>${time}</span>
+        </div>
+        <div class="today-mini-list">
+          ${g.results.map(r => {
+            const ptClass = r.pt >= 0 ? 'pos' : 'neg';
+            const ptStr = (r.pt > 0 ? '+' : '') + r.pt.toFixed(1);
+            return `
+              <div class="today-mini-row r${r.rank}">
+                <div class="today-mini-rank">${r.rank}</div>
+                <div class="today-mini-name">${r.name}</div>
+                <div class="today-mini-score">${r.score.toLocaleString()}</div>
+                <div class="today-mini-pt ${ptClass}">${ptStr}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
       </div>
     `;
+  }).join('');
+  document.getElementById('todayList').innerHTML = `<div class="today-list">${items}</div>`;
+}
+
+function renderHomeRecords(games) {
+  const recent = games.slice(0, 30); // 最新30件
+  if (recent.length === 0) {
+    document.getElementById('recordsList').innerHTML = `<div class="empty-state"><div class="emoji">🎴</div>対局履歴がありません</div>`;
+    return;
   }
+  document.getElementById('recordsList').innerHTML = `<div class="records">` +
+    recent.map(g => renderGameRow(g)).join('') +
+  `</div>`;
+}
 
-  function renderRanking(players) {
-    document.getElementById('rankingBody').innerHTML = players.map((p, i) => {
-      const rank = i + 1;
-      const rankClass = rank <= 3 ? `rank-${rank}` : '';
-      const ptClass = p.totalPt >= 0 ? 'pos' : 'neg';
-      const ptStr = (p.totalPt > 0 ? '+' : '') + p.totalPt.toFixed(1);
-      const numTag = p.num ? `<span class="player-num">#${p.num}</span>` : '';
-      return `
-        <tr class="row">
-          <td class="rank-cell ${rankClass}">${rank}</td>
-          <td>
-            ${numTag}<span class="player-name">${p.name}</span>
-            <span class="games-mini">${p.games}半荘</span>
-          </td>
-          <td class="num"><span class="points ${ptClass}">${ptStr}</span></td>
-        </tr>
-      `;
-    }).join('');
-  }
-
-  function renderRecords(games) {
-    const byRound = {};
-    games.forEach(g => {
-      if (!byRound[g.round]) byRound[g.round] = [];
-      byRound[g.round].push(g);
-    });
-    const rounds = Object.keys(byRound).map(Number).sort((a, b) => a - b);
-
-    document.getElementById('recordsList').innerHTML = rounds.map(r => {
-      const tables = byRound[r].sort((a, b) => a.table - b.table);
-      return `
-        <div class="round-group">
-          <div class="round-header">
-            <span>${r}半荘目</span>
-            <span class="en">ROUND ${r} · ${tables.length} TABLES</span>
-          </div>
-          ${tables.map(g => `
-            <div class="record-row">
-              <div class="record-table">
-                <span class="num">${g.table}</span>
-                <span class="label">TABLE</span>
+function renderGameRow(g) {
+  const d = new Date(g.gameDate || g.timestamp);
+  return `
+    <div class="record-row">
+      <div class="record-time">
+        <span class="date">${formatDateShort(d)}</span>
+        ${formatYear(d)}
+      </div>
+      <div class="record-results">
+        ${g.results.map(r => {
+          const ptClass = r.pt >= 0 ? 'pos' : 'neg';
+          const ptStr = (r.pt > 0 ? '+' : '') + r.pt.toFixed(1);
+          const seatTag = r.seat ? `<span class="seat-tag">${r.seat}</span>` : '';
+          return `
+            <div class="result-slot r${r.rank}">
+              <div class="result-rank">${r.rank}</div>
+              <div class="result-info">
+                <div class="result-name">${seatTag}<span class="pn">#${r.num}</span>${r.name}</div>
+                <div class="result-score">${r.score.toLocaleString()}</div>
               </div>
-              <div class="record-results">
-                ${g.results.map(rr => {
-                  const ptClass = rr.pt >= 0 ? 'pos' : 'neg';
-                  const ptStr = (rr.pt > 0 ? '+' : '') + rr.pt.toFixed(1);
-                  const numTag = rr.num ? `<span class="pn">#${rr.num}</span>` : '';
-                  return `
-                    <div class="result-slot r${rr.rank}">
-                      <div class="result-rank">${rr.rank}</div>
-                      <div class="result-info">
-                        <div class="result-name">${numTag}${rr.name}</div>
-                        <div class="result-score">${rr.score.toLocaleString()}</div>
-                      </div>
-                      <div class="result-pt ${ptClass}">${ptStr}</div>
-                    </div>
-                  `;
-                }).join('')}
-              </div>
+              <div class="result-pt ${ptClass}">${ptStr}</div>
             </div>
-          `).join('')}
-        </div>
-      `;
-    }).join('');
-  }
+          `;
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
 
-  function render() {
-    const { rows: deduped, dropped } = dedupRows(allRows);
-    const games = processData(deduped);
-    const players = aggregatePlayers(games);
-    document.getElementById('dedupCount').textContent = dropped;
-    renderProgress(games);
-    renderStats(games, players);
-    renderRanking(players);
-    renderRecords(games);
-    document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('ja-JP');
-  }
+function formatYear(d) {
+  return d.getFullYear();
+}
 
-  // ============================================================
-  // CSV読み込み
-  //
-  // ▼ 「結果」シート (フォーム送信そのまま、11列):
-  //    timestamp, round, table,
-  //    p1_num, p1_score, p2_num, p2_score, p3_num, p3_score, p4_num, p4_score
-  //
-  // ▼ 「選手マスタ」シート (任意、2列):
-  //    選手番号, 選手名
-  //
-  // 選手マスタを読み込んでおけば、結果シートの選手番号→選手名に自動変換します。
-  // 選手マスタ未設定/未登録番号の場合は「#101」のように番号がそのまま表示されます。
-  // ============================================================
+function formatDateShort(d) {
+  return `${d.getMonth() + 1}/${d.getDate()}`;
+}
 
-  // ▼▼▼ ここに自分のスプレッドシートURLを貼り付けてください ▼▼▼
-  // 空のままだとサンプルデータが表示されます。
-  // URLが入っていれば、サイトを開いたときに自動で読み込みます。
-  const DEFAULT_RESULTS_URL = "https://docs.google.com/spreadsheets/d/1MkIc19F2c8uYXfIfsnUioc7V1nzk5tW0lG6ZZgTpeWo/edit?resourcekey=&gid=369823880#gid=369823880";
-  const DEFAULT_MASTER_URL  = "https://docs.google.com/spreadsheets/d/1MkIc19F2c8uYXfIfsnUioc7V1nzk5tW0lG6ZZgTpeWo/edit?resourcekey=&gid=1921803685#gid=1921803685";
-  // ▲▲▲ ここまで ▲▲▲
+function formatDateFull(d) {
+  return `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+}
 
-  // 自動更新の間隔(ミリ秒)。0にすると自動更新オフ。
-  const AUTO_REFRESH_MS = 30000; // 30秒
+// ============================================================
+// 描画呼び出し
+// ============================================================
+function renderCurrentView() {
+  renderHome();
+}
 
-  let playerMaster = {}; // { 101: '比嘉', 102: '金城', ... }
-  let autoRefreshTimer = null;
+// ============================================================
+// データ読込
+// ============================================================
 
-  // サンプル用の選手マスタを初期セット
-  PLAYER_MASTER.forEach(p => { playerMaster[p.num] = p.name; });
 
-  function buildCsvUrl(url) {
-    const m = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
-    if (!m) return url;
-    const id = m[1];
-    const gidMatch = url.match(/[?&#]gid=(\d+)/);
-    const gid = gidMatch ? gidMatch[1] : '0';
-    return `https://docs.google.com/spreadsheets/d/${id}/export?format=csv&gid=${gid}`;
-  }
+// ============================================================
+// データ読込
+// ============================================================
+function buildCsvUrl(url) {
+  const m = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+  if (!m) return url;
+  const id = m[1];
+  const gidMatch = url.match(/[?&#]gid=(\d+)/);
+  const gid = gidMatch ? gidMatch[1] : '0';
+  return `https://docs.google.com/spreadsheets/d/${id}/export?format=csv&gid=${gid}`;
+}
 
-  async function loadData(silent = false) {
-    const url = document.getElementById('sheetUrl').value.trim();
-    const masterUrl = document.getElementById('masterUrl').value.trim();
-    const status = document.getElementById('status');
+async function loadData(silent = false) {
+  const url = document.getElementById('sheetUrl').value.trim();
+  const masterUrl = document.getElementById('masterUrl').value.trim();
+  const status = document.getElementById('status');
 
-    if (!url) {
-      // サンプルデータ表示
-      PLAYER_MASTER.forEach(p => { playerMaster[p.num] = p.name; });
-      allRows = SAMPLE_ROWS;
-      status.textContent = '● サンプルデータ表示中';
-      status.style.color = 'var(--ink-mute)';
-      document.getElementById('dataInfo').textContent = 'SAMPLE DATA';
-      render();
-      stopAutoRefresh();
-      return;
-    }
-
-    try {
-      if (!silent) status.textContent = '○ 読込中...';
-
-      // 選手マスタを先に読み込む(指定があれば)
-      if (masterUrl) {
-        const masterRes = await fetch(buildCsvUrl(masterUrl) + '&_=' + Date.now());
-        if (!masterRes.ok) throw new Error('選手マスタ読込失敗 (' + masterRes.status + ')');
-        const masterText = await masterRes.text();
-        playerMaster = parseMasterCSV(masterText);
-      } else if (Object.keys(playerMaster).length === 0) {
-        playerMaster = {};
-      }
-
-      // 結果シートを読み込む(キャッシュ回避のためタイムスタンプ付与)
-      const res = await fetch(buildCsvUrl(url) + '&_=' + Date.now());
-      if (!res.ok) throw new Error('結果読込失敗 (' + res.status + ')');
-      const text = await res.text();
-      allRows = parseCSV(text);
-
-      const masterCount = Object.keys(playerMaster).length;
-      const masterInfo = masterCount > 0 ? ` / 選手マスタ ${masterCount}名` : '';
-      const refreshInfo = AUTO_REFRESH_MS > 0 ? ' / 自動更新ON' : '';
-      const now = new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      status.textContent = `● 更新 ${now} (${allRows.length}行${masterInfo})${refreshInfo}`;
-      status.style.color = 'var(--bamboo)';
-      document.getElementById('dataInfo').textContent = 'GOOGLE SHEETS · ' + allRows.length + ' ROWS';
-      render();
-      startAutoRefresh();
-    } catch (e) {
-      status.textContent = '✕ ' + e.message;
-      status.style.color = 'var(--accent)';
-    }
-  }
-
-  function startAutoRefresh() {
-    if (AUTO_REFRESH_MS <= 0) return;
-    stopAutoRefresh();
-    autoRefreshTimer = setInterval(() => loadData(true), AUTO_REFRESH_MS);
-  }
-
-  function stopAutoRefresh() {
-    if (autoRefreshTimer) {
-      clearInterval(autoRefreshTimer);
-      autoRefreshTimer = null;
-    }
-  }
-
-  // 選手マスタCSVをパース: 1列目=番号、2列目=名前
-  function parseMasterCSV(text) {
-    const lines = text.trim().split(/\r?\n/);
-    const map = {};
-    for (let i = 1; i < lines.length; i++) { // 1行目はヘッダー想定
-      const cols = lines[i].split(',').map(s => s.trim());
-      if (cols.length < 2) continue;
-      const num = parseInt(cols[0]);
-      const name = cols[1];
-      if (!isNaN(num) && name) map[num] = name;
-    }
-    return map;
-  }
-
-  // 結果CSVをパース: フォーム送信形式の11列 (timestamp/round/table/4人分の番号+点数)
-  function parseCSV(text) {
-    const lines = text.trim().split(/\r?\n/);
-    const rows = [];
-    for (let i = 1; i < lines.length; i++) {
-      const cols = lines[i].split(',').map(s => s.trim());
-      if (cols.length < 11) continue;
-      const round = parseInt(cols[1]);
-      const table = parseInt(cols[2]);
-      if (!round || !table) continue;
-      const players = [];
-      let valid = true;
-      for (let p = 0; p < 4; p++) {
-        // p1: cols[3,4], p2: cols[5,6], p3: cols[7,8], p4: cols[9,10]
-        const base = 3 + p * 2;
-        const num = parseInt(cols[base]);
-        const score = parseInt(cols[base + 1]);
-        if (isNaN(num) || isNaN(score)) { valid = false; break; }
-        // 選手マスタから名前を解決(なければ番号をそのまま表示)
-        const name = playerMaster[num] || `#${num}`;
-        players.push({ num, name, score });
-      }
-      if (!valid) continue;
-      const tsRaw = cols[0];
-      const ts = Date.parse(tsRaw);
-      rows.push({
-        timestamp: isNaN(ts) ? i : ts,
-        round, table, players
-      });
-    }
-    return rows;
-  }
-
-  // 初期表示: デフォルトURLが設定されていれば自動読込、なければサンプル表示
-  if (DEFAULT_RESULTS_URL) {
-    document.getElementById('sheetUrl').value = DEFAULT_RESULTS_URL;
-    document.getElementById('masterUrl').value = DEFAULT_MASTER_URL;
-    loadData();
-  } else {
+  if (!url) {
+    // サンプル
+    playerMaster = {};
+    PLAYER_MASTER_SAMPLE.forEach(p => { playerMaster[p.num] = p.name; });
     allRows = SAMPLE_ROWS;
-    render();
+    allGames = processRows(allRows);
+    status.textContent = '● サンプルデータ表示中';
+    status.style.color = 'var(--ink-mute)';
+    document.getElementById('dataInfo').textContent = 'SAMPLE DATA';
+    renderCurrentView();
+    stopAutoRefresh();
+    return;
   }
+
+  try {
+    if (!silent) status.textContent = '○ 読込中...';
+
+    if (masterUrl) {
+      const r = await fetch(buildCsvUrl(masterUrl) + '&_=' + Date.now());
+      if (!r.ok) throw new Error('選手マスタ読込失敗');
+      playerMaster = parseMasterCSV(await r.text());
+    }
+    const r = await fetch(buildCsvUrl(url) + '&_=' + Date.now());
+    if (!r.ok) throw new Error('結果読込失敗');
+    allRows = parseCSV(await r.text());
+    allGames = processRows(allRows);
+
+    const now = new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const masterCount = Object.keys(playerMaster).length;
+    status.textContent = `● 更新 ${now} (${allRows.length}対局${masterCount > 0 ? ` / 選手 ${masterCount}名` : ''})`;
+    status.style.color = 'var(--bamboo)';
+    document.getElementById('dataInfo').textContent = 'GOOGLE SHEETS · ' + allRows.length + ' GAMES';
+    renderCurrentView();
+    startAutoRefresh();
+  } catch (e) {
+    status.textContent = '✕ ' + e.message;
+    status.style.color = 'var(--accent)';
+  }
+  document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('ja-JP');
+}
+
+function parseMasterCSV(text) {
+  const lines = text.trim().split(/\r?\n/);
+  const map = {};
+  for (let i = 1; i < lines.length; i++) {
+    const cols = lines[i].split(',').map(s => s.trim());
+    if (cols.length < 2) continue;
+    const num = parseInt(cols[0]);
+    const name = cols[1];
+    if (!isNaN(num) && name) map[num] = name;
+  }
+  return map;
+}
+
+// 結果CSV: 対局日, 東家選手番号, 東家点数, 南家選手番号, 南家点数, 西家選手番号, 西家点数, 北家選手番号, 北家点数, 送信日時 (10列)
+function parseCSV(text) {
+  const lines = text.trim().split(/\r?\n/);
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cols = lines[i].split(',').map(s => s.trim());
+    if (cols.length < 10) continue;
+    const players = [];
+    let valid = true;
+    // 東南西北の順に並んでいるので、それぞれを取り出す
+    // col[0]=対局日, col[1]=東家num, col[2]=東家score, col[3]=南家num, col[4]=南家score, ...
+    const seatNames = ['東', '南', '西', '北'];
+    for (let p = 0; p < 4; p++) {
+      const base = 1 + p * 2;
+      const num = parseInt(cols[base]);
+      const score = parseInt(cols[base + 1]);
+      if (isNaN(num) || isNaN(score)) { valid = false; break; }
+      const name = playerMaster[num] || `#${num}`;
+      players.push({ num, name, score, seat: seatNames[p] });
+    }
+    if (!valid) continue;
+
+    // 対局日(col[0])と送信日時(col[9])を解釈
+    // 送信日時の方が時刻情報として確実なので、それをtimestampに採用
+    // (対局日は日付のみなので、複数対局の順序が決まらない)
+    const gameDateRaw = cols[0];
+    const submittedRaw = cols[9];
+
+    let ts = Date.parse(submittedRaw);
+    if (isNaN(ts)) ts = Date.parse(gameDateRaw);
+    if (isNaN(ts)) ts = i;
+
+    // 表示用の日付は「対局日」を優先(送信日時とずれる可能性があるため)
+    let gameDate = Date.parse(gameDateRaw);
+    if (isNaN(gameDate)) gameDate = ts;
+
+    rows.push({
+      timestamp: ts,
+      gameDate: gameDate, // 表示用の日付(対局日)
+      players
+    });
+  }
+  return rows;
+}
+
+function startAutoRefresh() {
+  if (AUTO_REFRESH_MS <= 0) return;
+  stopAutoRefresh();
+  autoRefreshTimer = setInterval(() => loadData(true), AUTO_REFRESH_MS);
+}
+function stopAutoRefresh() {
+  if (autoRefreshTimer) { clearInterval(autoRefreshTimer); autoRefreshTimer = null; }
+}
+
+function toggleSource() {
+  document.getElementById('sourceDetail').classList.toggle('visible');
+  document.getElementById('sourceDetail2').classList.toggle('visible');
+}
+
+// ============================================================
+// 初期化
+// ============================================================
+if (DEFAULT_RESULTS_URL) {
+  document.getElementById('sheetUrl').value = DEFAULT_RESULTS_URL;
+  document.getElementById('masterUrl').value = DEFAULT_MASTER_URL;
+  loadData();
+} else {
+  allRows = SAMPLE_ROWS;
+  allGames = processRows(allRows);
+  renderHome();
+}
 </script>
 </body>
 </html>
