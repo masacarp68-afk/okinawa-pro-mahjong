@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>協会沖縄プロアマシリーズ 成績表</title>
+<title>沖縄健康麻雀教室 成績表</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -128,91 +128,7 @@
   .meta-block .label { color: var(--ink-mute); }
   .meta-block .val { color: var(--ink); font-weight: 700; }
 
-  /* ==== Two-column layout ==== */
-  .two-col {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    gap: 24px;
-    margin-bottom: 56px;
-  }
-  .two-col section { margin-bottom: 0; }
-
-  /* ==== Today's results (side column) ==== */
-  .today-list {
-    background: var(--paper);
-    border: 2px solid var(--line);
-    border-radius: 18px;
-    overflow: hidden;
-  }
-  .today-item {
-    padding: 14px 16px;
-    border-bottom: 1px dashed var(--line);
-  }
-  .today-item:last-child { border-bottom: none; }
-  .today-item-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--ink-mute);
-    letter-spacing: 0.1em;
-  }
-  .today-item-num {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 16px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .today-mini-list {
-    display: grid;
-    gap: 6px;
-  }
-  .today-mini-row {
-    display: grid;
-    grid-template-columns: 22px 1fr auto auto;
-    gap: 8px;
-    align-items: center;
-    padding: 5px 8px;
-    background: var(--bg-soft);
-    border-radius: 8px;
-    border-left: 3px solid var(--line);
-    font-size: 12px;
-  }
-  .today-mini-row.r1 { border-left-color: var(--gold); background: rgba(240, 185, 66, 0.10); }
-  .today-mini-row.r2 { border-left-color: var(--sky); background: rgba(90, 180, 214, 0.06); }
-  .today-mini-row.r3 { border-left-color: var(--rank-3); background: rgba(217, 127, 76, 0.06); }
-  .today-mini-row.r4 { border-left-color: var(--rank-4); }
-  .today-mini-rank {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 700;
-    text-align: center;
-    color: var(--ink-soft);
-  }
-  .today-mini-row.r1 .today-mini-rank { color: var(--rank-1); }
-  .today-mini-name {
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .today-mini-score {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--ink-mute);
-  }
-  .today-mini-pt {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
-    font-size: 12px;
-  }
-  .today-mini-pt.pos { color: var(--bamboo); }
-  .today-mini-pt.neg { color: var(--accent); }
-
-  @media (max-width: 980px) {
-    .two-col { grid-template-columns: 1fr; gap: 32px; }
-  }
+  /* ==== Period selector ==== */
   .period-bar {
     display: flex;
     gap: 8px;
@@ -381,6 +297,113 @@
     color: var(--ink-mute);
     margin-top: 6px;
   }
+
+  /* ==== Ranking toolbar (search + sort) ==== */
+  .ranking-toolbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .search-box {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 380px;
+    display: flex;
+    align-items: center;
+    background: var(--paper);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 0 12px;
+    transition: all 0.15s;
+  }
+  .search-box:focus-within {
+    border-color: var(--accent);
+    background: var(--paper);
+    box-shadow: 0 0 0 3px rgba(232, 83, 62, 0.1);
+  }
+  .search-icon {
+    font-size: 14px;
+    opacity: 0.6;
+    margin-right: 8px;
+  }
+  .search-box input {
+    flex: 1;
+    padding: 11px 0;
+    border: none;
+    background: transparent;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+  }
+  .search-box input::placeholder {
+    color: var(--ink-mute);
+  }
+  .search-clear {
+    cursor: pointer;
+    color: var(--ink-mute);
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0 4px;
+    line-height: 1;
+    transition: color 0.1s;
+  }
+  .search-clear:hover { color: var(--accent); }
+  .sort-hint {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--bg-soft);
+    border-radius: 12px;
+    border: 2px dashed var(--line);
+    font-size: 12px;
+  }
+  .sort-hint .hint-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+  }
+  .sort-hint #sortLabel {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* Sortable table headers */
+  .ranking th.sortable {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: background 0.1s;
+  }
+  .ranking th.sortable:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
+  .ranking th.sortable .sort-arrow {
+    display: inline-block;
+    margin-left: 4px;
+    opacity: 0.3;
+    font-size: 9px;
+  }
+  .ranking th.sortable.active .sort-arrow {
+    opacity: 1;
+    color: var(--accent);
+  }
+
+  /* No results state */
+  .no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--ink-mute);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+  }
+  .no-results .emoji { font-size: 28px; opacity: 0.5; margin-bottom: 8px; }
 
   /* ==== Ranking table ==== */
   .ranking {
@@ -737,13 +760,13 @@
 <div class="container">
 
   <header>
-    <div class="logo-mark" onclick="location.reload()">雀</div>
+    <div class="logo-mark" onclick="navigateTo('')">雀</div>
     <div class="title-block">
-      <h1 onclick="location.reload()">協会沖縄<span class="accent">プロアマ</span>シリーズ</h1>
-      <div class="subtitle">OKINAWA · PRO-AM · ONE-DAY TOURNAMENT</div>
+      <h1 onclick="navigateTo('')">沖縄健康<span class="accent">麻雀</span>教室</h1>
+      <div class="subtitle">OKINAWA HEALTH MAHJONG · 成績表</div>
     </div>
     <div class="meta-block">
-      <div><span class="label">RULE</span> &nbsp; <span class="val">4人打ち / 半荘 / 5回戦</span></div>
+      <div><span class="label">RULE</span> &nbsp; <span class="val">4人打ち / 半荘</span></div>
       <div><span class="label">UPD</span> &nbsp; <span class="val" id="lastUpdate">—</span></div>
     </div>
   </header>
@@ -764,6 +787,8 @@
 
   <!-- ==== ホーム画面 ==== -->
   <div id="homeView">
+    <div class="period-bar" id="periodBar"></div>
+
     <section>
       <div class="section-head">
         <h2>概況</h2>
@@ -773,38 +798,80 @@
       <div class="stats-grid" id="statsGrid"></div>
     </section>
 
-    <div class="two-col">
-      <section class="col-main">
-        <div class="section-head">
-          <h2>順位表</h2>
-          <span class="en">RANKING</span>
-          <div class="rule"></div>
+    <section>
+      <div class="section-head">
+        <h2>順位表</h2>
+        <span class="en">RANKING</span>
+        <div class="rule"></div>
+      </div>
+      <div class="ranking-toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="playerSearch" placeholder="名前で検索…" autocomplete="off" oninput="onSearchInput(this.value)">
+          <span class="search-clear" id="searchClear" onclick="clearSearch()" style="display:none;">×</span>
         </div>
-        <div id="rankingWrap"></div>
-      </section>
-
-      <section class="col-side">
-        <div class="section-head">
-          <h2>今日の成績</h2>
-          <span class="en">TODAY</span>
-          <div class="rule"></div>
+        <div class="sort-hint">
+          <span class="hint-label">SORT</span>
+          <span id="sortLabel">累計pt(降順)</span>
         </div>
-        <div id="todayList"></div>
-      </section>
-    </div>
+      </div>
+      <div id="rankingWrap"></div>
+    </section>
 
     <section>
       <div class="section-head">
         <h2>対局履歴</h2>
-        <span class="en">ALL GAMES</span>
+        <span class="en">RECENT GAMES</span>
         <div class="rule"></div>
       </div>
       <div id="recordsList"></div>
     </section>
   </div>
 
+  <!-- ==== 個人ページ ==== -->
+  <div id="playerView" style="display:none;">
+    <div class="player-header">
+      <div class="player-avatar" id="playerAvatar">—</div>
+      <div class="player-headline">
+        <h2 id="playerName">—</h2>
+        <div class="pn-tag" id="playerNumber">—</div>
+        <div class="pt-summary" id="playerTotalPt">—</div>
+      </div>
+      <div class="back-link" onclick="navigateTo('')">← 戻る</div>
+    </div>
+
+    <div class="period-bar" id="playerPeriodBar"></div>
+
+    <section>
+      <div class="section-head">
+        <h2>成績</h2>
+        <span class="en">PROFILE</span>
+        <div class="rule"></div>
+      </div>
+      <div class="player-stats" id="playerStats"></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>累計pt推移</h2>
+        <span class="en">PT TIMELINE</span>
+        <div class="rule"></div>
+      </div>
+      <div class="chart-wrap" id="chartWrap"></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>対局履歴</h2>
+        <span class="en">RECENT GAMES</span>
+        <div class="rule"></div>
+      </div>
+      <div id="playerRecords"></div>
+    </section>
+  </div>
+
   <footer>
-    <div>© 協会沖縄プロアマシリーズ</div>
+    <div>© 沖縄健康麻雀教室</div>
     <div id="dataInfo">SAMPLE DATA</div>
   </footer>
 </div>
@@ -815,8 +882,8 @@
 // ============================================================
 // 設定
 // ============================================================
-const DEFAULT_RESULTS_URL = "https://docs.google.com/spreadsheets/d/10JW_DidDrRXC1yQ8EtlskpbKXS1kpQpKakCDAOq7gaw/edit?gid=875240299#gid=875240299";
-const DEFAULT_MASTER_URL  = "https://docs.google.com/spreadsheets/d/1MYCVja3lWJYn02GuBE8pUtY48QL3Nkak-0DZtPx5CMQ/edit?gid=0#gid=0";
+const DEFAULT_RESULTS_URL = "https://docs.google.com/spreadsheets/d/1UIW0AlUXw_wTGIqj5SgknXzDFJ6lntBK_wxB8AFbtDA/edit?gid=1476038675#gid=1476038675";
+const DEFAULT_MASTER_URL  = "https://docs.google.com/spreadsheets/d/1stJBEEFYzWuL6DEEKU-m2qdaMufWRgVTy1M2GEiiQOI/edit?gid=0#gid=0";
 const AUTO_REFRESH_MS = 300000;   // 5分ごとに自動更新(0で無効)
 
 // ウマ・オカ
@@ -840,22 +907,20 @@ function generateSampleRows() {
   const rand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
   const seatNames = ['東', '南', '西', '北'];
 
-  // 1day大会: 今日、5半荘 × 4卓 = 20対局
+  // 過去90日くらいに渡って、1日2-6半荘くらい記録
   const today = new Date();
-  today.setHours(10, 0, 0, 0); // 10時スタート
-
-  const tables = 4;
-  const hanchanCount = 5;
-
-  for (let h = 0; h < hanchanCount; h++) {
-    for (let t = 0; t < tables; t++) {
-      const ts = new Date(today);
-      ts.setHours(10 + h * 2, t * 15 + Math.floor(rand() * 10));
-
+  for (let dayOffset = 90; dayOffset >= 0; dayOffset--) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - dayOffset);
+    // 週に1-2日は休み(対局なし)を入れる
+    if (rand() < 0.2) continue;
+    const gamesToday = 2 + Math.floor(rand() * 5); // 2-6半荘
+    for (let g = 0; g < gamesToday; g++) {
+      const ts = new Date(date);
+      ts.setHours(13 + g * 2, Math.floor(rand() * 60), Math.floor(rand() * 60));
+      // ランダムに4人選出して、東南西北を割り当て
       const shuffled = [...PLAYER_MASTER_SAMPLE].sort(() => rand() - 0.5);
-      const picked = shuffled.slice(t * 4, t * 4 + 4);
-      if (picked.length < 4) continue; // プレイヤー数が足りなければスキップ
-
+      const picked = shuffled.slice(0, 4);
       let scores = [
         25000 + Math.floor(rand() * 25000),
         25000 + Math.floor(rand() * 10000) - 5000,
@@ -867,7 +932,7 @@ function generateSampleRows() {
       scores = scores.map(s => Math.round(s / 100) * 100);
       const diff = 100000 - scores.reduce((s, v) => s + v, 0);
       scores[0] += diff;
-
+      // 持ち点配列とプレイヤーをランダムにシャッフル(席順は持ち点とは独立)
       const playerScorePairs = picked.map((p, i) => ({ player: p, score: scores[i] }));
       playerScorePairs.sort(() => rand() - 0.5);
       rows.push({
@@ -923,6 +988,12 @@ function calcPoints(playersSortedByScoreDesc) {
 let playerMaster = {};
 let allRows = [];
 let allGames = []; // 計算済みの全対局
+let currentPeriod = 'all'; // 'all' | 'YYYY-MM'
+let currentView = 'home'; // 'home' | 'player'
+let currentPlayerNum = null;
+let searchQuery = ''; // 検索キーワード
+let sortKey = 'totalPt'; // 'totalPt' | 'avgRank'
+let sortDir = 'desc'; // 'asc' | 'desc'
 let autoRefreshTimer = null;
 
 // 初期マスタ(サンプル用)
@@ -937,6 +1008,26 @@ function processRows(rows) {
     gameDate: row.gameDate || row.timestamp,
     results: calcPoints([...row.players].sort((a, b) => b.score - a.score))
   })).sort((a, b) => b.timestamp - a.timestamp);
+}
+
+function filterByPeriod(games, period) {
+  if (period === 'all') return games;
+  // period = 'YYYY-MM'
+  return games.filter(g => {
+    const d = new Date(g.gameDate || g.timestamp);
+    const ym = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+    return ym === period;
+  });
+}
+
+function getAvailablePeriods(games) {
+  const months = new Set();
+  games.forEach(g => {
+    const d = new Date(g.gameDate || g.timestamp);
+    months.add(d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'));
+  });
+  // 通算 + 月別(新しい順)
+  return ['all', ...Array.from(months).sort().reverse()];
 }
 
 function aggregatePlayers(games) {
@@ -957,46 +1048,73 @@ function aggregatePlayers(games) {
   })).sort((a, b) => b.totalPt - a.totalPt);
 }
 
-// 今日の対局のみ抽出
-function getTodayGames(games) {
-  const today = new Date();
-  const y = today.getFullYear();
-  const m = today.getMonth();
-  const d = today.getDate();
-  return games.filter(g => {
-    const gd = new Date(g.gameDate || g.timestamp);
-    return gd.getFullYear() === y && gd.getMonth() === m && gd.getDate() === d;
-  });
-}
-
 // ============================================================
 // ホーム画面の描画
 // ============================================================
-function renderHome() {
-  const players = aggregatePlayers(allGames);
-  const todayGames = getTodayGames(allGames);
-  renderHomeStats(allGames, players, todayGames);
-  renderHomeRanking(players);
-  renderTodayList(todayGames);
-  renderHomeRecords(allGames);
+function periodLabel(period) {
+  if (period === 'all') return { jp: '通算', en: 'ALL-TIME' };
+  const [y, m] = period.split('-');
+  return { jp: `${parseInt(m)}月`, en: `${y}.${m}` };
 }
 
-function renderHomeStats(games, players, todayGames) {
+function renderPeriodBar(containerId, periods, onClick) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = periods.map(p => {
+    const lbl = periodLabel(p);
+    const active = p === currentPeriod ? 'active' : '';
+    return `<button class="period-chip ${active}" data-period="${p}">
+      <span class="en">${lbl.en}</span>${lbl.jp}
+    </button>`;
+  }).join('');
+  container.querySelectorAll('.period-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      currentPeriod = chip.dataset.period;
+      onClick();
+    });
+  });
+}
+
+function renderHome() {
+  const periods = getAvailablePeriods(allGames);
+  if (!periods.includes(currentPeriod)) currentPeriod = 'all';
+
+  renderPeriodBar('periodBar', periods, renderHome);
+
+  const filtered = filterByPeriod(allGames, currentPeriod);
+  const players = aggregatePlayers(filtered);
+  renderHomeStats(filtered, players);
+  renderHomeRanking(players);
+  renderHomeRecords(filtered);
+}
+
+function renderHomeStats(games, players) {
   const totalGames = games.length;
   const totalPlayers = players.length;
   const top = players[0];
-  const todayCount = todayGames ? todayGames.length : 0;
+  const periodLbl = periodLabel(currentPeriod);
+
+  let periodRange = '';
+  if (games.length > 0) {
+    const dates = games.map(g => new Date(g.gameDate || g.timestamp));
+    const min = new Date(Math.min(...dates));
+    const max = new Date(Math.max(...dates));
+    if (min.toDateString() === max.toDateString()) {
+      periodRange = formatDateShort(min);
+    } else {
+      periodRange = `${formatDateShort(min)} 〜 ${formatDateShort(max)}`;
+    }
+  }
 
   document.getElementById('statsGrid').innerHTML = `
     <div class="stat-card">
-      <div class="stat-label">TODAY</div>
-      <div class="stat-value">${todayCount}</div>
-      <div class="stat-sub">今日の対局数</div>
+      <div class="stat-label">PERIOD</div>
+      <div class="stat-value" style="font-size:26px;">${periodLbl.jp}</div>
+      <div class="stat-sub">${periodRange || '—'}</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">TOTAL GAMES</div>
+      <div class="stat-label">GAMES</div>
       <div class="stat-value">${totalGames}</div>
-      <div class="stat-sub">通算対局数</div>
+      <div class="stat-sub">対局数</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">PLAYERS</div>
@@ -1013,19 +1131,60 @@ function renderHomeStats(games, players, todayGames) {
 
 function renderHomeRanking(players) {
   if (players.length === 0) {
-    document.getElementById('rankingWrap').innerHTML = `<div class="empty-state"><div class="emoji">🀄</div>まだ記録がありません</div>`;
+    document.getElementById('rankingWrap').innerHTML = `<div class="empty-state"><div class="emoji">🀄</div>この期間の記録はまだありません</div>`;
     return;
   }
-  const rows = players.map((p, i) => {
-    const rank = i + 1;
+
+  // 元の並び順(累計pt降順)を保ったランクを保存
+  const withOrigRank = players.map((p, i) => ({ ...p, origRank: i + 1 }));
+
+  // ソート適用
+  const sorted = [...withOrigRank].sort((a, b) => {
+    let va, vb;
+    if (sortKey === 'avgRank') {
+      va = a.avgRank; vb = b.avgRank;
+    } else {
+      va = a.totalPt; vb = b.totalPt;
+    }
+    return sortDir === 'asc' ? va - vb : vb - va;
+  });
+
+  // 検索フィルタ
+  const q = searchQuery.trim().toLowerCase();
+  const filtered = q
+    ? sorted.filter(p => (p.name || '').toLowerCase().includes(q) || String(p.num).includes(q))
+    : sorted;
+
+  // ソートラベル更新
+  const sortLabel = document.getElementById('sortLabel');
+  if (sortLabel) {
+    const keyJp = sortKey === 'avgRank' ? '平均順位' : '累計pt';
+    const dirJp = sortDir === 'asc' ? '昇順' : '降順';
+    sortLabel.textContent = `${keyJp}(${dirJp})`;
+  }
+
+  if (filtered.length === 0) {
+    document.getElementById('rankingWrap').innerHTML = `
+      <div class="ranking">
+        <div class="no-results">
+          <div class="emoji">🔍</div>
+          「${escapeHtml(searchQuery)}」に該当する選手が見つかりません
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const rows = filtered.map(p => {
+    const rank = p.origRank; // 表示される順位は「元の累計pt順位」
     const rankClass = rank <= 3 ? `rank-${rank}` : '';
     const ptClass = p.totalPt >= 0 ? 'pos' : 'neg';
     const ptStr = (p.totalPt > 0 ? '+' : '') + p.totalPt.toFixed(1);
     return `
-      <tr class="row">
+      <tr class="row" onclick="navigateTo('player=${p.num}')">
         <td class="rank-cell ${rankClass}">${rank}</td>
         <td>
-          <span class="player-num">#${p.num}</span><span class="player-name">${p.name}</span>
+          <span class="player-num">#${p.num}</span><span class="player-name">${escapeHtml(p.name)}</span>
           <span class="games-mini">${p.games}半荘</span>
         </td>
         <td class="num"><span class="points ${ptClass}">${ptStr}</span></td>
@@ -1038,9 +1197,17 @@ function renderHomeRanking(players) {
             <span>${p.ranks[3]}</span>
           </span>
         </td>
+        <td class="num arrow-link">→</td>
       </tr>
     `;
   }).join('');
+
+  const arrow = (key) => {
+    if (sortKey !== key) return '<span class="sort-arrow">▲▼</span>';
+    return sortDir === 'asc' ? '<span class="sort-arrow">▲</span>' : '<span class="sort-arrow">▼</span>';
+  };
+  const activeClass = (key) => sortKey === key ? 'active' : '';
+
   document.getElementById('rankingWrap').innerHTML = `
     <div class="ranking">
       <table>
@@ -1048,9 +1215,10 @@ function renderHomeRanking(players) {
           <tr>
             <th class="center">順位</th>
             <th>プレイヤー</th>
-            <th class="num">累計pt</th>
-            <th class="num">平均順位</th>
+            <th class="num sortable ${activeClass('totalPt')}" onclick="setSort('totalPt')">累計pt${arrow('totalPt')}</th>
+            <th class="num sortable ${activeClass('avgRank')}" onclick="setSort('avgRank')">平均順位${arrow('avgRank')}</th>
             <th class="center">着順分布</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
@@ -1059,40 +1227,38 @@ function renderHomeRanking(players) {
   `;
 }
 
-// 今日の対局を時系列順(古い→新しい)で表示
-function renderTodayList(todayGames) {
-  if (!todayGames || todayGames.length === 0) {
-    document.getElementById('todayList').innerHTML = `<div class="empty-state" style="padding: 40px 16px;"><div class="emoji">📭</div>今日の対局はまだありません</div>`;
-    return;
+function escapeHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ソートキー切替(同じキーなら方向トグル、違うキーなら初期方向)
+function setSort(key) {
+  if (sortKey === key) {
+    sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+  } else {
+    sortKey = key;
+    // 平均順位は「小さいほど良い」ので昇順が初期、累計ptは降順が初期
+    sortDir = key === 'avgRank' ? 'asc' : 'desc';
   }
-  // 古い順に並べて「1半荘目, 2半荘目...」と表示
-  const sorted = [...todayGames].sort((a, b) => a.timestamp - b.timestamp);
-  const items = sorted.map((g, idx) => {
-    const time = new Date(g.timestamp).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
-    return `
-      <div class="today-item">
-        <div class="today-item-head">
-          <span class="today-item-num">${idx + 1}半荘目</span>
-          <span>${time}</span>
-        </div>
-        <div class="today-mini-list">
-          ${g.results.map(r => {
-            const ptClass = r.pt >= 0 ? 'pos' : 'neg';
-            const ptStr = (r.pt > 0 ? '+' : '') + r.pt.toFixed(1);
-            return `
-              <div class="today-mini-row r${r.rank}">
-                <div class="today-mini-rank">${r.rank}</div>
-                <div class="today-mini-name">${r.name}</div>
-                <div class="today-mini-score">${r.score.toLocaleString()}</div>
-                <div class="today-mini-pt ${ptClass}">${ptStr}</div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      </div>
-    `;
-  }).join('');
-  document.getElementById('todayList').innerHTML = `<div class="today-list">${items}</div>`;
+  renderHome();
+}
+
+// 検索
+function onSearchInput(v) {
+  searchQuery = v;
+  const clear = document.getElementById('searchClear');
+  if (clear) clear.style.display = v ? '' : 'none';
+  renderHome();
+}
+function clearSearch() {
+  searchQuery = '';
+  const el = document.getElementById('playerSearch');
+  if (el) el.value = '';
+  const clear = document.getElementById('searchClear');
+  if (clear) clear.style.display = 'none';
+  renderHome();
 }
 
 function renderHomeRecords(games) {
@@ -1120,7 +1286,7 @@ function renderGameRow(g) {
           const ptStr = (r.pt > 0 ? '+' : '') + r.pt.toFixed(1);
           const seatTag = r.seat ? `<span class="seat-tag">${r.seat}</span>` : '';
           return `
-            <div class="result-slot r${r.rank}">
+            <div class="result-slot r${r.rank}" onclick="navigateTo('player=${r.num}')">
               <div class="result-rank">${r.rank}</div>
               <div class="result-info">
                 <div class="result-name">${seatTag}<span class="pn">#${r.num}</span>${r.name}</div>
@@ -1148,16 +1314,226 @@ function formatDateFull(d) {
 }
 
 // ============================================================
-// 描画呼び出し
+// 個人ページの描画
 // ============================================================
-function renderCurrentView() {
-  renderHome();
+function renderPlayerPage(num) {
+  const periods = getAvailablePeriods(allGames);
+  if (!periods.includes(currentPeriod)) currentPeriod = 'all';
+
+  renderPeriodBar('playerPeriodBar', periods, () => renderPlayerPage(num));
+
+  const filtered = filterByPeriod(allGames, currentPeriod);
+  // この選手が含まれる対局だけ
+  const playerGames = filtered.filter(g => g.results.some(r => r.num === num));
+  const playerResults = playerGames.flatMap(g => g.results.filter(r => r.num === num).map(r => ({ ...r, timestamp: g.timestamp, gameDate: g.gameDate || g.timestamp })));
+
+  const name = playerMaster[num] || (playerResults[0] && playerResults[0].name) || `#${num}`;
+
+  // ヘッダー
+  document.getElementById('playerAvatar').textContent = name.charAt(0);
+  document.getElementById('playerName').textContent = name;
+  document.getElementById('playerNumber').textContent = `PLAYER #${num} · ${periodLabel(currentPeriod).jp}`;
+
+  const totalPt = playerResults.reduce((s, r) => s + r.pt, 0);
+  const totalPtRounded = Math.round(totalPt * 10) / 10;
+  const totalPtEl = document.getElementById('playerTotalPt');
+  totalPtEl.textContent = (totalPtRounded > 0 ? '+' : '') + totalPtRounded.toFixed(1) + ' pt';
+  totalPtEl.className = 'pt-summary ' + (totalPtRounded >= 0 ? 'pos' : 'neg');
+
+  // 統計
+  renderPlayerStats(playerResults);
+
+  // チャート
+  renderPlayerChart(playerResults);
+
+  // 対局履歴
+  renderPlayerRecords(playerGames);
+}
+
+function renderPlayerStats(results) {
+  const games = results.length;
+  if (games === 0) {
+    document.getElementById('playerStats').innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;"><div class="emoji">🎴</div>この期間の対局はありません</div>`;
+    return;
+  }
+  const ranks = [0,0,0,0];
+  results.forEach(r => { ranks[r.rank - 1]++; });
+  const avgRank = ranks.reduce((s, c, i) => s + c * (i+1), 0) / games;
+  const rates = ranks.map(c => (c / games) * 100);
+  const pts = results.map(r => r.pt);
+  const best = Math.max(...pts);
+  const worst = Math.min(...pts);
+  const avgPt = pts.reduce((s, v) => s + v, 0) / games;
+
+  document.getElementById('playerStats').innerHTML = `
+    <div class="player-stat">
+      <div class="label">GAMES</div>
+      <div class="value">${games}</div>
+      <div class="sub">対局数</div>
+    </div>
+    <div class="player-stat">
+      <div class="label">AVG RANK</div>
+      <div class="value">${avgRank.toFixed(2)}</div>
+      <div class="sub">平均順位</div>
+    </div>
+    <div class="player-stat">
+      <div class="label">AVG PT</div>
+      <div class="value" style="font-size:22px;">${avgPt >= 0 ? '+' : ''}${avgPt.toFixed(1)}</div>
+      <div class="sub">平均pt</div>
+    </div>
+    <div class="player-stat r1">
+      <div class="label">TOP</div>
+      <div class="value">${rates[0].toFixed(1)}<span style="font-size:14px;">%</span></div>
+      <div class="sub">1位 (${ranks[0]}回)</div>
+    </div>
+    <div class="player-stat r2">
+      <div class="label">2ND</div>
+      <div class="value">${rates[1].toFixed(1)}<span style="font-size:14px;">%</span></div>
+      <div class="sub">2位 (${ranks[1]}回)</div>
+    </div>
+    <div class="player-stat r3">
+      <div class="label">3RD</div>
+      <div class="value">${rates[2].toFixed(1)}<span style="font-size:14px;">%</span></div>
+      <div class="sub">3位 (${ranks[2]}回)</div>
+    </div>
+    <div class="player-stat r4">
+      <div class="label">LAST</div>
+      <div class="value">${rates[3].toFixed(1)}<span style="font-size:14px;">%</span></div>
+      <div class="sub">4位 (${ranks[3]}回)</div>
+    </div>
+    <div class="player-stat best">
+      <div class="label">BEST</div>
+      <div class="value" style="font-size:22px;">+${best.toFixed(1)}</div>
+      <div class="sub">最高pt</div>
+    </div>
+    <div class="player-stat worst">
+      <div class="label">WORST</div>
+      <div class="value" style="font-size:22px;">${worst.toFixed(1)}</div>
+      <div class="sub">最低pt</div>
+    </div>
+  `;
+}
+
+function renderPlayerChart(results) {
+  const wrap = document.getElementById('chartWrap');
+  if (results.length === 0) {
+    wrap.innerHTML = `<div style="text-align:center;color:var(--ink-mute);padding:40px;font-family:'Shippori Mincho',serif;">データなし</div>`;
+    return;
+  }
+  // 時系列順に並べて累積ptを算出
+  const sorted = [...results].sort((a, b) => a.timestamp - b.timestamp);
+  let cum = 0;
+  const points = sorted.map(r => {
+    cum += r.pt;
+    return { t: r.gameDate || r.timestamp, cum: Math.round(cum * 10) / 10, pt: r.pt };
+  });
+
+  // SVG生成
+  const W = 1080;
+  const H = 320;
+  const padL = 60, padR = 20, padT = 24, padB = 40;
+  const innerW = W - padL - padR;
+  const innerH = H - padT - padB;
+
+  const minCum = Math.min(0, ...points.map(p => p.cum));
+  const maxCum = Math.max(0, ...points.map(p => p.cum));
+  const range = maxCum - minCum || 1;
+  const yPad = range * 0.1;
+  const yMin = minCum - yPad;
+  const yMax = maxCum + yPad;
+  const yRange = yMax - yMin;
+
+  const xOf = i => padL + (points.length === 1 ? innerW / 2 : (i / (points.length - 1)) * innerW);
+  const yOf = v => padT + innerH - ((v - yMin) / yRange) * innerH;
+  const y0 = yOf(0);
+
+  // 軸ラベル(y方向に5本)
+  const yTicks = [];
+  for (let i = 0; i <= 4; i++) {
+    const v = yMin + (yRange * i / 4);
+    yTicks.push({ v: Math.round(v * 10) / 10, y: yOf(v) });
+  }
+
+  // 経路
+  const pathD = points.map((p, i) => (i === 0 ? 'M' : 'L') + xOf(i).toFixed(1) + ',' + yOf(p.cum).toFixed(1)).join(' ');
+  const areaD = pathD + ` L ${xOf(points.length - 1).toFixed(1)},${y0.toFixed(1)} L ${xOf(0).toFixed(1)},${y0.toFixed(1)} Z`;
+
+  // x軸の日付ラベル(最大6個)
+  const labelCount = Math.min(6, points.length);
+  const xLabels = [];
+  for (let i = 0; i < labelCount; i++) {
+    const idx = points.length === 1 ? 0 : Math.round((i / (labelCount - 1)) * (points.length - 1));
+    const d = new Date(points[idx].t);
+    xLabels.push({ x: xOf(idx), label: formatDateShort(d) });
+  }
+
+  wrap.innerHTML = `
+    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
+      <!-- グリッド -->
+      ${yTicks.map(t => `<line x1="${padL}" x2="${W - padR}" y1="${t.y}" y2="${t.y}" stroke="var(--line)" stroke-width="1"/>`).join('')}
+      <!-- ゼロライン -->
+      <line x1="${padL}" x2="${W - padR}" y1="${y0}" y2="${y0}" stroke="var(--ink-mute)" stroke-width="1" stroke-dasharray="4,4"/>
+      <!-- 面塗り -->
+      <path d="${areaD}" fill="var(--accent)" fill-opacity="0.12"/>
+      <!-- ライン -->
+      <path d="${pathD}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- ポイント -->
+      ${points.map((p, i) => {
+        const cx = xOf(i);
+        const cy = yOf(p.cum);
+        return `<circle cx="${cx}" cy="${cy}" r="4" fill="var(--paper)" stroke="var(--accent)" stroke-width="2"><title>${formatDateShort(new Date(p.t))} : 累計${p.cum > 0 ? '+' : ''}${p.cum}pt (この対局 ${p.pt > 0 ? '+' : ''}${p.pt}pt)</title></circle>`;
+      }).join('')}
+      <!-- Y軸ラベル -->
+      ${yTicks.map(t => `<text x="${padL - 8}" y="${t.y + 4}" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--ink-mute)">${t.v > 0 ? '+' : ''}${t.v}</text>`).join('')}
+      <!-- X軸ラベル -->
+      ${xLabels.map(l => `<text x="${l.x}" y="${H - padB + 18}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--ink-mute)">${l.label}</text>`).join('')}
+    </svg>
+  `;
+}
+
+function renderPlayerRecords(games) {
+  if (games.length === 0) {
+    document.getElementById('playerRecords').innerHTML = `<div class="empty-state"><div class="emoji">🎴</div>対局履歴がありません</div>`;
+    return;
+  }
+  const recent = games.slice(0, 30);
+  document.getElementById('playerRecords').innerHTML = `<div class="records">` +
+    recent.map(g => renderGameRow(g)).join('') +
+  `</div>`;
 }
 
 // ============================================================
-// データ読込
+// ナビゲーション(URLハッシュ)
 // ============================================================
+function navigateTo(hash) {
+  location.hash = hash;
+}
 
+// 描画のみ行う(スクロールはしない)
+function renderCurrentView() {
+  const hash = location.hash.replace('#', '');
+  if (hash.startsWith('player=')) {
+    const num = parseInt(hash.split('=')[1]);
+    currentView = 'player';
+    currentPlayerNum = num;
+    document.getElementById('homeView').style.display = 'none';
+    document.getElementById('playerView').style.display = '';
+    renderPlayerPage(num);
+  } else {
+    currentView = 'home';
+    currentPlayerNum = null;
+    document.getElementById('homeView').style.display = '';
+    document.getElementById('playerView').style.display = 'none';
+    renderHome();
+  }
+}
+
+// ハッシュ変更時(ナビゲーション)はスクロールも一番上へ
+function handleRoute() {
+  renderCurrentView();
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', handleRoute);
 
 // ============================================================
 // データ読込
@@ -1299,7 +1675,7 @@ if (DEFAULT_RESULTS_URL) {
 } else {
   allRows = SAMPLE_ROWS;
   allGames = processRows(allRows);
-  renderHome();
+  handleRoute();
 }
 </script>
 </body>
